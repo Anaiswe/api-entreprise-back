@@ -7,11 +7,11 @@ const token = process.env.token;
 //routes API conventions
 router.get("/siret", async (req, res) => {
   const { number, name } = req.query;
-  console.log(number, name);
+  // console.log(number, name);
   try {
     // const search = res.query;
     // console.log(search);
-   
+
     const response = await axios.get(
       `https://api.insee.fr/entreprises/sirene/V3/siret`,
       {
