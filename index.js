@@ -1,7 +1,3 @@
-// Simple sample server
-// Il faut prévoir un .env pour les variables d'environnement
-// install/import Cors
-// Install Morgan ? (check the doc )
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");

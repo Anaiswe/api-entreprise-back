@@ -17,64 +17,58 @@ router.get("/entreprise", async (req, res) => {
 
   if (req.query.search) {
     if (req.query.search.length > 0) {
-      // console.log("THIS REQ QUERY", req.query.search.length);
+   
     }
   }
 
-  // Valider les critères de recherche|
   try {
-    // Construire la requête pour l'API
+    // build api request
     let apiUrl = process.env.url;
     const link = "&";
 
     if (search) {
       apiUrl += `q=${search}${link}`;
-      //console.log(apiUrl);
+      
     }
 
     if (siret) {
       apiUrl += `siret=${search}${link}`;
-      //console.log(apiUrl);
+      
     }
 
     if (departement) {
       apiUrl += `departement=${departement}${link}`;
-      //console.log(apiUrl);
+      
     }
 
     if (postalCode) {
       apiUrl += `code_postal=${postalCode}${link}`;
-      //console.log(apiUrl);
+      
     }
 
     if (isIdcc !== undefined) {
       apiUrl += `convention_collective_renseignee=${isIdcc}${link}`;
-      //console.log(apiUrl);
+      
     }
 
     if (page) {
       apiUrl += `page=${page}${link}`;
-      //console.log(apiUrl);
+      
     }
 
     if (perPage) {
       apiUrl += `per_page=${perPage}${link}`;
-     // console.log(apiUrl);
+     
     }
 
     if (limitMatchingEtablissments) {
       apiUrl += `limite_matching_etablissements=${limitMatchingEtablissments}`;
     }
-    //console.log(apiUrl);
 
-    // Envoyer la requête à l'API et renvoyer la réponse au client
     const response = await axios.get(apiUrl);
-
     const data = response.data;
-     console.log("THIS DATA ORIGIN", response.data);
-  
-    // console.log("this new url to request", newUrl)
     res.status(200).json(data);
+
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
