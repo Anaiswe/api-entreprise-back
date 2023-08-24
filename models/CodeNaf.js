@@ -4,7 +4,7 @@ const codeNafSchema = new mongoose.Schema({
   id: String,
   label: String
 }, {
-  collection: "codes-naf" // Spécifiez le nom de la collection ici
+  collection: process.env.collection
 });
 
 const CodeNaf = mongoose.model("CodeNaf", codeNafSchema);
