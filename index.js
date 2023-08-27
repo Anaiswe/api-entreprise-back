@@ -17,8 +17,10 @@ mongoose.connect(process.env.MONGODB_URI,
 //routes
 const entreprise = require("./routes/entreprise");
 app.use(entreprise);
-const codeNafRoute = require("./routes/codeNaf");
-app.use(codeNafRoute);
+const codeNaf = require("./routes/codeNaf");
+app.use(codeNaf);
+const idcc = require("./routes/idcc");
+app.use(idcc);
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello World!" });
