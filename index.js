@@ -4,15 +4,16 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
 
-const corsOptions ={
-  origin:'http://localhost:3000', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
+// Autoriser les requêtes depuis http://localhost:3000
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // Ajoutez d'autres en-têtes CORS si nécessaire (par exemple, les méthodes HTTP autorisées, les en-têtes personnalisés, etc.)
+  next();
+});
 
 const app = express();
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(morgan("dev"));
 
 mongoose.connect(process.env.MONGODB_URI, 
