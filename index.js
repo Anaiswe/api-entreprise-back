@@ -6,7 +6,7 @@ const morgan = require("morgan");
 
 const corsOptions ={
   
-  origin:'https://main--remarkable-marzipan-fd2dd1.netlify.app/', 
+  origin:'https://remarkable-marzipan-fd2dd1.netlify.app', 
   // origin:'http://localhost:3000', 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
