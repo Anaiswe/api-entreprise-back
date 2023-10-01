@@ -4,17 +4,17 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
 
-const corsOptions ={
+// const corsOptions ={
   
-  // origin:'https://remarkable-marzipan-fd2dd1.netlify.app', 
-  origin:'http://localhost:3000', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
+//   // origin:'https://remarkable-marzipan-fd2dd1.netlify.app', 
+//   origin:'http://localhost:3000', 
+//   credentials:true,            //access-control-allow-credentials:true
+//   optionSuccessStatus:200
+// }
 
 const app = express();
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(morgan("dev"));
 
 mongoose.connect(process.env.MONGODB_URI, 
