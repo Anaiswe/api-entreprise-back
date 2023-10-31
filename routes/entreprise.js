@@ -30,83 +30,51 @@ function addIdToResults(results, page, perPage) {
   });
 }
 
-
 router.get("/entreprise", async (req, res) => {
-  const {
-    search,
-    siret,
-    departement,
-    postalCode,
-    isIdcc,
-    page,
-    perPage,
-    limitMatchingEtablissments,
-  } = req.query;
-
-
-  if (req.query.search) {
-    if (req.query.search.length > 0) {
-   
-    }
-  }
-
   try {
-    // build api request
-    let apiUrl = process.env.url;
-    const link = "&";
+    const {
+      search,
+      siret,
+      departement,
+      postalCode,
+      isIdcc,
+      page,
+      perPage,
+      limitMatchingEtablissments,
+    } = req.query;
 
-    if (search) {
-      apiUrl += `q=${search}${link}`;
-      
-    }
+    // if (!search) {
+    
+    //   return res.status(400).json({ error: "Le paramètre 'search' est obligatoire." });
+    // }
 
-    if (siret) {
-      apiUrl += `siret=${search}${link}`;
-      
-    }
+    const params = {
+      q: search,
+      siret: siret,
+      departement: departement,
+      code_postal: postalCode,
+      convention_collective_renseignee: isIdcc,
+      page: page,
+      per_page: perPage,
+      limite_matching_etablissements: limitMatchingEtablissments,
+    };
 
-    if (departement) {
-      apiUrl += `departement=${departement}${link}`;
-      
-    }
+    const apiUrl = process.env.url;
 
-    if (postalCode) {
-      apiUrl += `code_postal=${postalCode}${link}`;
-      
-    }
+    const response = await axios.get(apiUrl, { params });
 
-    if (isIdcc !== undefined) {
-      apiUrl += `convention_collective_renseignee=${isIdcc}${link}`;
-      
-    }
-
-    if (page) {
-      apiUrl += `page=${page}${link}`;
-      
-    }
-
-    if (perPage) {
-      apiUrl += `per_page=${perPage}${link}`;
-     
-    }
-
-    if (limitMatchingEtablissments) {
-      apiUrl += `limite_matching_etablissements=${limitMatchingEtablissments}`;
-    }
-
-    const response = await axios.get(apiUrl);
     const copiedResponse = deepCopyObject(response.data);
 
-    if (copiedResponse.results && Array.isArray(copiedResponse.results)) {
+    if (Array.isArray(copiedResponse.results)) {
       addIdToResults(copiedResponse.results, page, perPage);
     }
 
     res.status(200).json(copiedResponse);
-
   } catch (error) {
+
     res.status(400).json({ error: error.message });
   }
 });
 
-
 module.exports = router;
+

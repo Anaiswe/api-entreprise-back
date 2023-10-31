@@ -7,7 +7,6 @@ router.get("/postal-codes", async (req, res) => {
   try {
 
     const prefix = parseInt(req.query.prefix);
-    console.log("this prefix", prefix);
 
     const lowerBound = prefix * 1000;
     const upperBound = lowerBound + 999;
@@ -17,7 +16,7 @@ router.get("/postal-codes", async (req, res) => {
     });
 
     const numberOfObjects = filteredCodesPostaux.length;
-    console.log("Nombre d'objets trouvés : ", numberOfObjects);
+    // console.log("Nombre d'objets trouvés : ", numberOfObjects);
 
 
 

@@ -7,7 +7,7 @@ router.get("/conventions/:id", async (req, res) => {
   try {
     const apiUrl = process.env.idccUrl;
     const siret = req.params.id;
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const response = await axios.get(
       `${apiUrl}${siret}`
     );

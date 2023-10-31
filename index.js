@@ -41,5 +41,5 @@ app.all("*", (req, res) => {
 });
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log("Server is ok!");
+  console.log("Server is running");
 });
