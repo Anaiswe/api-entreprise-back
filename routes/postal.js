@@ -15,7 +15,7 @@ router.get("/postal-codes", async (req, res) => {
       Code_postal: { $gte: lowerBound, $lte: upperBound }
     });
 
-    const numberOfObjects = filteredCodesPostaux.length;
+    // const numberOfObjects = filteredCodesPostaux.length;
     // console.log("Nombre d'objets trouvés : ", numberOfObjects);
 
 

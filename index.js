@@ -22,7 +22,9 @@ app.use(codeNaf);
 const idcc = require("./routes/idcc");
 app.use(idcc);
 const postalCodes = require("./routes/postal");
-app.use(postalCodes)
+app.use(postalCodes);
+const mailForm = require ("./routes/mail");
+app.use(mailForm)
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello World!" });
