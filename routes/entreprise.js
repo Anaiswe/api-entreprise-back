@@ -2,16 +2,17 @@ const axios = require("axios");
 const express = require("express");
 const router = express.Router();
 
-
+//fonction qui effectue une copie profonde
 function deepCopyObject(obj) {
+  //Si l'élément n'est pas de type "object" ou est nul, la fonction renvoie simplement l'objet tel quel.
   if (typeof obj !== 'object' || obj === null) {
     return obj;
   }
-
+//Si c'est un tableau, la fonction utilise la méthode map pour créer une nouvelle copie du tableau en appelant récursivement deepCopyObject pour chaque élément du tableau.
   if (Array.isArray(obj)) {
     return obj.map(item => deepCopyObject(item));
   }
-
+//Si l'objet est un objet (et non un tableau), la fonction itère sur chaque propriété de l'objet et effectue une copie profonde récursive de chaque propriété.
   const copiedObject = {};
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {

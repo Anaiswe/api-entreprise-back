@@ -25,6 +25,8 @@ const postalCodes = require("./routes/postal");
 app.use(postalCodes);
 const mailForm = require ("./routes/mail");
 app.use(mailForm)
+const scrapedData = require ("./routes/scrapedData");
+app.use(scrapedData);
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello World!" });
