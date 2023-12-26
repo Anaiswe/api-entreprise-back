@@ -71,8 +71,8 @@ router.get("/entreprise", async (req, res) => {
     const copiedResponse = deepCopyObject(response.data);
 
     if (Array.isArray(copiedResponse.results)) {
-      // addIdToResults(copiedResponse.results, page, perPage);
-      addIdToResults(copiedResponse.results, parseInt(page), parseInt(perPage));
+      addIdToResults(copiedResponse.results, page, perPage);
+      // addIdToResults(copiedResponse.results, parseInt(page), parseInt(perPage));
     }
 
     res.status(200).json(copiedResponse);
