@@ -1,6 +1,6 @@
 const axios = require("axios");
 const express = require("express");
-const { v4: uuidv4 } = require('uuid');
+// const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
 
@@ -29,8 +29,8 @@ function deepCopyObject(obj) {
 function addIdToResults(results, page, perPage) {
   results.forEach((obj, index) => {
      // L'ID est basé sur la page, l'index et le nombre d'éléments par page
-    //  obj.id = (page - 1) * perPage + index + 1;
-    obj.id = (page - 1) * perPage + index + uuidv4();
+     obj.id = (page - 1) * perPage + index + 1;
+    // obj.id = (page - 1) * perPage + index + uuidv4();
     // obj.id = `${uuidv4()}-page${page}-index${index + 1}-perPage${perPage}`;
   });
 }
