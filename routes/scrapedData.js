@@ -16,7 +16,7 @@ const scrapePage = async (url, selector) => {
   }
 };
 
-// gérer les erreurs 
+// gérer les erreurs
 const handleScrapingError = (res, error) => {
   console.error("Error scraping:", error);
   res.status(500).json({ error: "Internal Server Error" });
@@ -27,12 +27,17 @@ const sendScrapedData = (res, text, source) => {
   res.json({ text, source });
 };
 
+const idccUrl = process.env.IdccInfosUrl;
+const agreementUrl = process.env.AgreementInfoUrl;
+const egaproUrl = process.env.EgaproInfoUrl;
+// console.log(idccUrl)
+
 router.get("/infoConventionCollective", async (req, res) => {
   try {
-    const IdccInfosUrl = process.env.IdccInfosUrl;
-    const selector = "div.sc-85c198dc-0.iBmTcc";
-    const scrapedData = await scrapePage(IdccInfosUrl, selector);
-    sendScrapedData(res, scrapedData, "https://code.travail.gouv.fr/");
+
+    const selector = "#content > div > div > div > div > div > table > tbody > tr > td > p";
+    const scrapedData = await scrapePage(idccUrl, selector);
+    sendScrapedData(res, scrapedData, idccUrl);
   } catch (error) {
     handleScrapingError(res, error);
   }
@@ -40,48 +45,24 @@ router.get("/infoConventionCollective", async (req, res) => {
 
 router.get("/infoAccordCollectif", async (req, res) => {
   try {
-    const AgreementInfoUrl = process.env.AgreementInfoUrl;
-    const selector = "div.sc-85c198dc-0.iBmTcc";
-    const scrapedData = await scrapePage(AgreementInfoUrl, selector);
-    sendScrapedData(res, scrapedData, "https://code.travail.gouv.fr/");
+
+    const selector = "#content > div > div > div > div > div > table > tbody > tr > td > p";
+    const scrapedData = await scrapePage(agreementUrl, selector);
+    sendScrapedData(res, scrapedData, agreementUrl);
   } catch (error) {
     handleScrapingError(res, error);
   }
 });
-
 
 router.get("/infoEgapro", async (req, res) => {
   try {
-    const EgaproInfoUrl = process.env.EgaproInfoUrl;
 
-    // Scraper le premier sélecteur
-    const selector1 = "#fiche-item-1 > div > p:nth-child(1)";
-    const contenuTexte1 = await scrapePage(EgaproInfoUrl, selector1);
-
-    // Scraper le deuxième sélecteur
-    const selector2 = "#fiche-item-2 > div > p:nth-child(1)";
-    const contenuTexte2 = await scrapePage(EgaproInfoUrl, selector2);
-
-    // Scraper le troisième sélecteur
-    const selector3 = "#fiche-item-3 > div > p";
-    const contenuTexte3 = await scrapePage(EgaproInfoUrl, selector3);
-
-    // Créer un tableau avec les textes extraits
-    const textArray = [contenuTexte1, contenuTexte2, contenuTexte3];
-
-    // Créer un objet avec les données
-    const scrapedData = {
-      text: textArray.join("\n"), // Concaténer les textes avec un saut de ligne
-      source: "https://www.service-public.fr/",
-    };
-
-  
-    res.json(scrapedData);
+    const selector = "#intro > p";
+    const scrapedData = await scrapePage(egaproUrl, selector);
+    sendScrapedData(res, scrapedData, egaproUrl);
   } catch (error) {
     handleScrapingError(res, error);
   }
 });
-
-
 
 module.exports = router;
